@@ -1,0 +1,83 @@
+<div class="container">
+  <div  [hidden]="submitted">
+    <h1>Voter's Form</h1>
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name"
+               required
+               [(ngModel)]="model.name" name="name"
+               #name="ngModel" >
+        <div [hidden]="name.valid || name.pristine" 
+             class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="alterEgo">E-mail Address</label>
+        <input type="text" class="form-control" id="alterEgo"
+               [(ngModel)]="model.emailAddress" name="alterEgo" >
+      </div>
+
+      <div class="form-group">
+        <label for="power">Your Voting Options</label>
+        <select class="form-control" id="power"
+                required
+                [(ngModel)]="model.choice" name="power" 
+                #power="ngModel" >
+          <option *ngFor="let p of choices" [value]="p">{{p}}</option>
+        </select>
+        <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
+          Choice to a candidate option is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!heroForm.form.valid">Submit</button>
+
+      <button type="button" class="btn btn-default" (click)="newHero()">Another Voter</button>
+
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-xs-3">Name</div>
+      <div class="col-xs-9  pull-left">{{ model.name }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Alter Ego</div>
+      <div class="col-xs-9 pull-left">{{ model.alterEgo }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Power</div>
+      <div class="col-xs-9 pull-left">{{ model.power }}</div>
+    </div>
+    <br>
+    <button class="btn btn-default" (click)="submitted=false">Edit</button>
+  </div>
+</div>
+
+<!-- ====================================================  -->
+
+<hr>
+<style>
+  .no-style .ng-valid {
+  border-left: 1px  solid #CCC
+}
+
+  .no-style .ng-invalid {
+  border-left: 1px  solid #CCC
+}
+</style>
+<div class="no-style" style="margin-left: 4px">
+
+
+  <!-- ====================================================  -->
+
+
+
+</div>
+
+
