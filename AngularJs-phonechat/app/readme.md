@@ -1,4 +1,4 @@
-## "<html ng-app>":
+## ng-app:
 The ng-app attribute represents an Angular directive named ngApp (Angular uses name-with-dashes for its 
 custom attributes and camelCase for the corresponding directives which implement them). This directive is used to
 flag the html element that Angular should consider to be the root element of our application. This gives application 
@@ -7,7 +7,7 @@ application.
 
 
 #####AngularJS script tag:
-##"<script src="bower_components/angular/angular.js">":
+## script src="bower_components/angular/angular.js":
 This code downloads the angular.js script and registers a callback that will be executed by the browser when the 
 containing HTML page is fully downloaded. When the callback is executed, Angular looks for the ngApp directive. 
 If Angular finds the directive, it will bootstrap the application with the root of the application DOM being the element 
@@ -21,7 +21,6 @@ This line demonstrates the core feature of Angular's templating capabilities
 The binding tells Angular that it should evaluate an expression and insert the result into the DOM in place of 
 the binding. Rather than a one-time insert, as we'll see in the next steps, a binding will result in efficient 
 continuous updates whenever the result of the expression evaluation changes.
-
 
 
 
