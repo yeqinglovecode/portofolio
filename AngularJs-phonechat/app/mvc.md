@@ -82,3 +82,40 @@ describe('PhoneListCtrl', function(){
 The test instantiates PhoneListCtrl and verifies that the phones array property on the scope contains three records. This example demonstrates how easy it is to create a unit test for code in Angular. Since testing is such a critical part of software development, we make it easy to create tests in Angular so that developers are encouraged to write them.
 
 
+##Controller
+###mission at this time: add full text search
+#####Template:
+app/index.html
+` 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <!--Sidebar content-->
+
+        Search: <input ng-model="query">
+
+      </div>
+      <div class="col-md-10">
+        <!--Body content-->
+
+        <ul class="phones">
+          <li ng-repeat="phone in phones | filter:query">
+            {{phone.name}}
+            <p>{{phone.snippet}}</p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div> `
+  
+We added a standard HTML <input> tag and used Angular's filter function to process the input for the ngRepeat directive.
+
+This lets a user enter search criteria and immediately see the effects of their search on the phone list. This new code demonstrates the following:
+* Data-binding: This is one of the core features in Angular. When the page loads, Angular binds the name of the input box to a variable of the same name in the data model and keeps the two in sync.
+
+In this code, the data that a user types into the input box (named query) is immediately available as a filter input in the list repeater (phone in phones | filter:query). When changes to the data model cause the repeater's input to change, the repeater efficiently updates the DOM to reflect the current state of the model.
+
+* Use of the filter filter: The filter function uses the query value to create a new array that contains only those records that match the query.
+
+ngRepeat automatically updates the view in response to the changing number of phones returned by the filter filter. The process is completely transparent to the developer.
