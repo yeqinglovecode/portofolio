@@ -7,7 +7,7 @@ Angular refreshes the appropriate binding points, which updates the view.
 example code:
 app/index.html
 <html ng-app="phonecatApp">
-<head>
+` <head>
   ...
   <script src="bower_components/angular/angular.js"></script>
   <script src="js/controllers.js"></script>
@@ -22,7 +22,7 @@ app/index.html
   </ul>
 
 </body>
-</html>
+</html>`
 
 We replaced the hard-coded phone list with the ngRepeat directive and two Anuglar expressions:
 * The ng-repeat="phone in phones" attribute in the <li> tag is an Angular repeater directive. The repeater tells Angular to create a <li>
@@ -41,7 +41,7 @@ The controller is simply a constructor function that takes a $scope parameter:
 
 example code:
 app/js/controllers.js:
-var phonecatApp = angular.module('phonecatApp', []);
+` var phonecatApp = angular.module('phonecatApp', []);
 
 phonecatApp.controller('PhoneListCtrl', function ($scope) {
   $scope.phones = [
@@ -52,7 +52,7 @@ phonecatApp.controller('PhoneListCtrl', function ($scope) {
     {'name': 'MOTOROLA XOOM™',
      'snippet': 'The Next, Next Generation tablet.'}
   ];
-});
+});`
 
 Here we declared a controller called PhoneListCtrl and registered it in an AngularJS module, phonecatApp. Notice that our ng-app directive (on the <html> tag) now specifies the phonecatApp module name as the module to load when bootstrapping the Angular application.
 
