@@ -1,0 +1,72 @@
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+<!-- Firechat -->
+<link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+<script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+You can also install Firechat via npm or Bower and its dependencies will be downloaded automatically:
+
+$ npm install firechat --save
+$ bower install firechat --save
+Getting Started with Firebase
+
+Firechat requires Firebase in order to authenticate users and store data. You can sign up here for a free account.
+
+Short Example
+
+Firechat requires an authenticated Firebase reference. Firebase supports authentication with either your own custom authentication system or a number of built-in providers (more on this below).
+
+Let's put it all together, using Twitter authentication in our example:
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+    <!-- Firechat -->
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+    <script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+  </head>
+  <body>
+    <script>
+      function login() {
+        // Log the user in via Twitter
+        var provider = new firebase.auth.TwitterAuthProvider();
+        firebase.auth().signInWithPopup(provider).catch(function(error) {
+          console.log("Error authenticating user:", error);
+        });
+      }
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        // Once authenticated, instantiate Firechat with the logged in user
+        if (user) {
+          initChat(user);
+        }
+      });
+
+      function initChat(user) {
+        // Get a Firebase Database ref
+        var chatRef = firebase.database().ref("chat");
+
+        // Create a Firechat instance
+        var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+
+        // Set the Firechat user
+        chat.setUser(user.uid, user.displayName);
+      }
+    </script>
+
+    <div id="firechat-wrapper">
+      <button onclick="login('twitter');">Login with Twitter</button>
+    </div>
+  </body>
+</html>
